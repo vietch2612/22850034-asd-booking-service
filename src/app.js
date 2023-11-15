@@ -30,6 +30,7 @@ io.on('connection', (socket) => {
 
   // Passenger start a trip
   socket.on('new_trip', (data) => {
+    console.log(data);
     const trip = JSON.parse(data)
 
     // Join the specified room
