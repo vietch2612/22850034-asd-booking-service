@@ -1,44 +1,46 @@
-// app.js
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
-const tripRouters = require('./routes/tripRouter');
-const customerRouters = require('./routes/customerRouter');
+const tripRoutes = require('./routes/trip_route');
+const customerRoutes = require('./routes/customer_route');
 const { sequelize } = require('./models');
-const socketHandler = require('./socket/socketHandler');
-const authenticateRequest = require('./middlewares/authMiddleware');
+const socketHandler = require('./socket/socket_handler');
+const authenticateRequest = require('./middlewares/auth_middleware');
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// Attach the authenticateRequest middleware to all routes
 app.use(authenticateRequest);
 
 app.use(cors());
 app.use(bodyParser.json());
 
+// Temporarily logger
 app.use((req, res, next) => {
   console.log('Incoming Request Body:', req.body);
   next();
 });
 
-// Attach Socket.IO instance to the app
+// Init socket connection
 app.io = io;
 
-// Use trip routes
-app.use('/api/trips', tripRouters);
-app.use('/api/customers', customerRouters);
+/** Route management */
+app.use('/api/trips', tripRoutes);
+app.use('/api/customers', customerRoutes);
 
-// Handle the Socket connection
+/** Handle socket connection */
 socketHandler(io);
 
-// Sync database and start the server
+/** Start the server */
+const port = process.env.PORT || 4000;
 sequelize.sync().then(() => {
-  console.log('PostgreSQL database connected');
-  server.listen(3001, () => {
-    console.log('Server is running on http://localhost:3001');
+  console.log('HCMUSCab BE PostgreSQL database connected');
+  server.listen(port, () => {
+    console.log(`HCMUSCab BE is running on http://localhost:${port}`);
   });
 });
