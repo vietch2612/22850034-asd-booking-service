@@ -1,10 +1,11 @@
-// enums/trip_status.js
-
+module.exports = TripStatus;
 const TripStatus = {
-    PENDING: 0,
-    IN_PROGRESS: 1,
-    COMPLETED: 2,
-    CANCELED: 3,
+    SUBMITTED: 0,
+    ALLOCATED: 1,
+    ARRIVED: 2,
+    DRIVING: 3,
+    COMPLETED: 4,
+    CANCELLED: 5
 };
 
 module.exports = TripStatus;

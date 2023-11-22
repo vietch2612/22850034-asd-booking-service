@@ -1,70 +1,39 @@
-// services/tripService.js
-const { Trip } = require('../models');
+const models = require('../models'); // Adjust the path based on your project structure
 
-const createTrip = async ({
-    customerId,
-    pickupLocation,
-    pickupLat,
-    pickupLong,
-    dropoffLocation,
-    dropoffLat,
-    dropoffLong,
-    fare,
-    tripLength,
-    notes,
-}) => {
+const createTrip = async (tripData) => {
     try {
-        // Create a new trip in the database with the provided details
-        const trip = await Trip.create({
-            customerId,
-            pickupLocation,
-            pickupLat,
-            pickupLong,
-            dropoffLocation,
-            dropoffLat,
-            dropoffLong,
-            fare,
-            tripLength,
-            notes,
-            status: 'finding_driver',
-        });
-
-        // You might want to perform additional logic here, such as notifying available drivers
-
-        // For simplicity, let's assume there is a fake driver
-        const fakeDriverDetails = {
-            id: '123',
-            name: 'John Doe',
-            vehicleNumber: 'XYZ123',
-            currentLocation: { latitude: 12.9751, longitude: 77.6047 },
-        };
-
-        console.log("Trip ID: ", trip.id);
-
-        return {
-            tripId: trip.id, // Make sure to return the trip ID
-            status: trip.status,
-            driverDetails: fakeDriverDetails,
-        };
+        const trip = await models.Trip.create(tripData);
+        return trip;
     } catch (error) {
-        throw error;
+        throw new Error('Error creating trip: ' + error.message);
     }
 };
 
-const getAllTrips = async () => {
-    // Implementation for retrieving all trips
-    const trips = await Trip.findAll();
-    return trips;
+const getTripById = async (tripId) => {
+    try {
+        const trip = await models.Trip.findByPk(tripId);
+        return trip;
+    } catch (error) {
+        throw new Error('Error getting trip by ID: ' + error.message);
+    }
 };
 
-const getTripById = async (tripId) => {
-    // Implementation for retrieving trip details by ID
-    const tripDetails = await Trip.findByPk(tripId);
-    return tripDetails;
+const updateTrip = async (tripId, updatedTripData) => {
+    try {
+        const trip = await models.Trip.findByPk(tripId);
+        if (!trip) {
+            throw new Error('Trip not found');
+        }
+
+        await trip.update(updatedTripData);
+        return trip;
+    } catch (error) {
+        throw new Error('Error updating trip: ' + error.message);
+    }
 };
 
 module.exports = {
     createTrip,
-    getAllTrips,
     getTripById,
+    updateTrip,
 };

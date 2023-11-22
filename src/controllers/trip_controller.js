@@ -1,102 +1,45 @@
-// controllers/tripController.js
-const { validationResult } = require('express-validator');
-const { calculateFare } = require('../services/fareService');
-const { createTrip } = require('../services/tripService');
+const express = require('express');
+const router = express.Router();
+const tripService = require('../services/trip_service'); // Adjust the path based on your project structure
 
-const createTripController = async (req, res) => {
+// POST /trips
+router.post('/trips', validateTripData, async (req, res) => {
     try {
-        const {
-            customerId,
-            pickupLocation,
-            pickupLat,
-            pickupLong,
-            dropoffLocation,
-            dropoffLat,
-            dropoffLong,
-            fare,
-            tripLength,
-            notes
-        } = req.body;
-
-        // Call a service to create a new trip
-        const { tripId, status, driverDetails } = await createTrip({
-            customerId,
-            pickupLocation,
-            pickupLat,
-            pickupLong,
-            dropoffLocation,
-            dropoffLat,
-            dropoffLong,
-            fare,
-            tripLength,
-            notes
-        });
-
-        console.log("tripID: ", tripId);
-
-        // Emit a socket event to notify drivers about the new trip
-        req.app.io.emit('newTripAvailable', { tripId, pickupLocation, dropoffLocation });
-
-        // You might want to send additional information to the customer app
-        // For example, driverDetails could include information about the available drivers
-
-        res.status(200).json({ tripId, status, driverDetails });
+        const tripData = req.body; // Assuming you have the trip data in the request body
+        const newTrip = await tripService.createTrip(tripData);
+        res.status(201).json(newTrip);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message });
     }
-};
+});
 
-const getAllTripsController = async (req, res) => {
+// GET /trips/:id
+router.get('/trips/:id', async (req, res) => {
     try {
-        // Call a service to retrieve all trips
-        const trips = await getAllTrips();
+        const tripId = req.params.id;
+        const trip = await tripService.getTripById(tripId);
 
-        res.status(200).json({ trips });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-};
-
-const getTripDetailsByIdController = async (req, res) => {
-    try {
-        const { tripId } = req.params;
-
-        // Call a service to retrieve trip details by ID
-        const tripDetails = await getTripById(tripId);
-
-        if (!tripDetails) {
-            return res.status(404).json({ error: 'Trip not found' });
+        if (!trip) {
+            res.status(404).json({ error: 'Trip not found' });
+        } else {
+            res.status(200).json(trip);
         }
-
-        res.status(200).json({ tripDetails });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message });
     }
-};
+});
 
-
-const calculateFareController = async (req, res) => {
+// PUT /trips/:id
+router.put('/trips/:id', async (req, res) => {
     try {
-        // Validate the request body using express-validator
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
+        const tripId = req.params.id;
+        const updatedTripData = req.body;
 
-        const { tripLength } = req.body;
-
-        // Call a service to calculate the fare based on the length of the trip
-        const fare = await calculateFare(tripLength);
-
-        res.status(200).json({ fare });
+        const updatedTrip = await tripService.updateTrip(tripId, updatedTripData);
+        res.status(200).json(updatedTrip);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message });
     }
-};
+});
 
-module.exports = { createTripController, calculateFareController, getAllTripsController, getTripDetailsByIdController };
-
+module.exports = router;

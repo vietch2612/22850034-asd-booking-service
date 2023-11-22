@@ -1,18 +1,28 @@
-// validators/tripValidator.js
-const { check } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 
-const validateCalculateTripFare = [
-    check('tripLength').exists().withMessage('Trip length is required'),
-    check('tripLength').isNumeric().withMessage('Trip length must be a numeric value'),
+const validateTripData = [
+    body('customerId').exists().isInt(),
+    body('serviceTypeId').exists().isInt(),
+    body('pickupLocation').exists().isString(),
+    body('pickupLocationLat').optional().isDecimal(),
+    body('pickupLocationLong').optional().isDecimal(),
+    body('dropoffLocationLat').exists().isDecimal(),
+    body('dropoffLocationLong').exists().isDecimal(),
+    body('dropoffLocation').exists().isString(),
+    body('startTime').optional().isISO8601().toDate(),
+    body('endTime').optional().isISO8601().toDate(),
+    body('fare').optional().isInt(),
+    body('distance').exists().isInt(),
+    body('rating').optional().isInt(),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        next();
+    },
 ];
 
-const validateCreateTrip = [
-    check('customer_id').exists().withMessage('customer_id is required'),
-    check('pickupLocation').exists().withMessage('Pickup location is required'),
-    check('dropoffLocation').exists().withMessage('dropoffLocation location is required'),
-    check('fare').exists().withMessage('Fare is required'),
-    check('tripLengh').exists().withMessage('tripLengh is required'),
-];
-
-
-module.exports = { validateCalculateTripFare, validateCreateTrip };
+module.exports = {
+    validateTripData,
+};
