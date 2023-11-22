@@ -1,5 +1,3 @@
-// customerService.js
-
 const { Customer } = require('../models');
 
 async function getAllCustomers() {
