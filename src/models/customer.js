@@ -5,14 +5,15 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Customer extends Model {
         static associate(models) {
-            Customer.belongsTo(model.CustomerType, { foreignKey: 'customerTypeId' });
-            Customer.hasMany(model.Trip, { foreignKey: 'customerId' });
+            Customer.belongsTo(models.CustomerType, { foreignKey: 'customerTypeId' });
+            Customer.hasMany(models.Trip, { foreignKey: 'customerId' });
         }
     }
     Customer.init({
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
             allowNull: false,
         },
         customerTypeId: {

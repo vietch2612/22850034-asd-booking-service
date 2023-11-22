@@ -15,7 +15,7 @@ module.exports = {
             },
             endKm: {
                 type: Sequelize.INTEGER,
-                allowNull: false,
+                allowNull: true,
             },
             pricePerKm: {
                 type: Sequelize.INTEGER,

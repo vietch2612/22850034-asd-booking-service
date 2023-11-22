@@ -27,10 +27,6 @@ module.exports = {
                 type: Sequelize.DECIMAL,
                 allowNull: false,
             },
-            lastUpdatedAt: {
-                type: Sequelize.DECIMAL,
-                allowNull: false,
-            },
             createdAt: {
                 type: Sequelize.DATE,
                 allowNull: false,

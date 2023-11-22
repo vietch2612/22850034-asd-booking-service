@@ -6,13 +6,14 @@ module.exports = (sequelize, DataTypes) => {
     class DeclinedTrip extends Model {
         static associate(models) {
             DeclinedTrip.belongsTo(models.Trip, { foreignKey: 'tripId' });
-            DeclinedTrip.hasMany(models.Driver, { foreignKey: 'driverId' });
+            DeclinedTrip.belongsTo(models.Driver, { foreignKey: 'driverId' });
         }
     }
     DeclinedTrip.init({
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
             allowNull: false,
         },
         driverId: {

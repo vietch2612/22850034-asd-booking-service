@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
             allowNull: false,
         },
         driverId: {
@@ -23,10 +24,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         long: {
-            type: DataTypes.DECIMAL,
-            allowNull: false
-        },
-        lastUpdatedAt: {
             type: DataTypes.DECIMAL,
             allowNull: false
         }

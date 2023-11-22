@@ -7,13 +7,14 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             Car.belongsTo(models.CarBrand, { foreignKey: 'carBrandId' });
             Car.belongsToMany(models.ServiceType, { through: models.CarServiceType, foreignKey: 'carId', otherKey: 'serviceTypeId' });
-            Car.hasMany(model.Driver, { foreignKey: 'driverId' });
+            Car.hasMany(models.Driver, { foreignKey: 'carId' });
         }
     }
     Car.init({
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
             allowNull: false,
         },
         carBrandId: {

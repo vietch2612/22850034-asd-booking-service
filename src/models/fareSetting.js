@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
             allowNull: false,
         },
         startKm: {
@@ -17,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         endKm: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         pricePerKm: {
             type: DataTypes.INTEGER,
