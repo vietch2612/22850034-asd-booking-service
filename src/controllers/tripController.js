@@ -47,6 +47,36 @@ const createTripController = async (req, res) => {
     }
 };
 
+const getAllTripsController = async (req, res) => {
+    try {
+        // Call a service to retrieve all trips
+        const trips = await getAllTrips();
+
+        res.status(200).json({ trips });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+const getTripDetailsByIdController = async (req, res) => {
+    try {
+        const { tripId } = req.params;
+
+        // Call a service to retrieve trip details by ID
+        const tripDetails = await getTripById(tripId);
+
+        if (!tripDetails) {
+            return res.status(404).json({ error: 'Trip not found' });
+        }
+
+        res.status(200).json({ tripDetails });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 
 const calculateFareController = async (req, res) => {
     try {
@@ -68,5 +98,5 @@ const calculateFareController = async (req, res) => {
     }
 };
 
-module.exports = { createTripController, calculateFareController };
+module.exports = { createTripController, calculateFareController, getAllTripsController, getTripDetailsByIdController };
 

@@ -51,4 +51,20 @@ const createTrip = async ({
     }
 };
 
-module.exports = { createTrip };
+const getAllTrips = async () => {
+    // Implementation for retrieving all trips
+    const trips = await Trip.findAll();
+    return trips;
+};
+
+const getTripById = async (tripId) => {
+    // Implementation for retrieving trip details by ID
+    const tripDetails = await Trip.findByPk(tripId);
+    return tripDetails;
+};
+
+module.exports = {
+    createTrip,
+    getAllTrips,
+    getTripById,
+};

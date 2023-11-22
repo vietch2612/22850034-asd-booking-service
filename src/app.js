@@ -6,6 +6,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const tripRoutes = require('./routes/tripRouter');
 const { sequelize } = require('./models');
+const socketHandler = require('./socket/socketHandler');
 
 const app = express();
 const server = http.createServer(app);
@@ -23,64 +24,10 @@ app.use((req, res, next) => {
 app.io = io;
 
 // Use trip routes
-app.use('/api/trip', tripRoutes);
+app.use('/api/trips', tripRoutes);
 
-io.on('connection', (socket) => {
-  console.log('A user connected');
-
-  // Passenger start a trip
-  socket.on('new_trip', (data) => {
-    console.log(data);
-    const trip = JSON.parse(data)
-
-    // Join the specified room
-    socket.join(trip.tripId);
-    console.log(`New trip: ${trip.tripId}`);
-
-    // Finding driver
-    io.to(trip.tripId).emit('finding_driver', 'finding_driver');
-    console.log(`Finding driver: ${trip.tripId}`);
-  });
-
-  socket.on('accept_trip', (data) => {
-    const trip = JSON.parse(data)
-    console.log(`Driver ${trip.driverName} joined: ${trip.tripId}`);
-
-    // Finding driver
-    io.to(trip.tripId).emit('picking_up', trip);
-    console.log(`Driver accepted: ${trip.tripId}`);
-  });
-
-  socket.on('location_update', (data) => {
-    const trip = JSON.parse(data)
-    console.log(`Driver ${trip.driverName} updated location`);
-
-    // Finding driver
-    io.to(trip.tripId).emit('location_update', trip);
-    console.log(`Driver updated location: ${trip.tripId}`);
-  });
-
-  socket.on('in_transit', (data) => {
-    const trip = JSON.parse(data)
-    console.log(`In transit ${trip.tripId}`);
-
-    io.to(trip.tripId).emit('in_transit', trip);
-    console.log(`in_transit: ${trip.tripId}`);
-  });
-
-  socket.on('completed', (data) => {
-    const trip = JSON.parse(data)
-    console.log(`Trip ${trip.tripId} is completed!`);
-
-    io.to(trip.tripId).emit('completed', trip);
-  });
-
-  // Handling disconnection
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
-  });
-});
-
+// Handle the Socket connection
+socketHandler(io);
 
 // Sync database and start the server
 sequelize.sync().then(() => {
@@ -89,4 +36,3 @@ sequelize.sync().then(() => {
     console.log('Server is running on http://localhost:3001');
   });
 });
-

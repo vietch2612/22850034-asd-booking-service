@@ -7,40 +7,43 @@ module.exports = (sequelize, DataTypes) => {
     }
     Trip.init({
         id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             allowNull: false,
         },
         customerId: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         driverId: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             allowNull: true,
         },
+        serviceTypeId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         status: {
-            type: DataTypes.STRING,
-            defaultValue: 'new',
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
         },
         pickupLocation: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        pickupLat: {
+        pickupLocationLat: {
             type: DataTypes.DECIMAL,
             allowNull: true,
         },
-        pickupLong: {
+        pickupLocationLong: {
             type: DataTypes.DECIMAL,
             allowNull: true,
         },
-        dropoffLat: {
+        dropoffLocationLat: {
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
-        dropoffLong: {
+        dropoffLocationLong: {
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
@@ -57,19 +60,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
         },
         fare: {
-            type: DataTypes.DECIMAL(10, 2),
+            type: DataTypes.INTEGER,
             allowNull: true,
         },
-        paymentStatus: {
-            type: DataTypes.STRING,
-            defaultValue: 'pending',
-        },
-        tripLength: {
+        distance: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        notes: {
-            type: DataTypes.TEXT,
+        rating: {
+            type: DataTypes.INTEGER,
             allowNull: true,
         }
     }, {
