@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="621px" preserveAspectRatio="none" style="width:749px;height:621px;" version="1.1" viewBox="0 0 749 621" width="749px" zoomAndPan="magnify"><defs/><g><ellipse cx="120.8221" cy="112.1306" fill="#F8F8F8" rx="61.1531" ry="14.6306" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="93" x="74.3221" y="115.615">1-create-car</text><ellipse cx="120.7926" cy="164.8247" fill="#F8F8F8" rx="82.1236" ry="18.8247" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="142" x="49.7926" y="168.3091">2-create-car-brand</text><ellipse cx="120.7609" cy="311.8774" fill="#F8F8F8" rx="22.0919" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="27" x="107.2609" y="315.3618">app</text><ellipse cx="312.7106" cy="457.8774" fill="#F8F8F8" rx="27.0416" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="34" x="295.7106" y="461.3618">auth</text><ellipse cx="502.3432" cy="457.2348" fill="#F8F8F8" rx="59.1742" ry="14.2348" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="88" x="458.3432" y="460.7192">authController</text><ellipse cx="120.8976" cy="218.9457" fill="#F8F8F8" rx="67.7286" ry="15.9457" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="109" x="66.3976" y="222.4301">authentication</text><ellipse cx="120.8399" cy="457.0342" fill="#F8F8F8" rx="63.1709" ry="15.0342" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="98" x="71.8399" y="460.5186">authMiddleware</text><ellipse cx="120.6396" cy="266.8774" fill="#F8F8F8" rx="19.9706" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="24" x="108.6396" y="270.3618">car</text><ellipse cx="312.5452" cy="111.8774" fill="#F8F8F8" rx="50.3762" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="279.0452" y="115.3618">carBrand</text><ellipse cx="312.5161" cy="160.8694" fill="#F8F8F8" rx="69.8471" ry="16.3694" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="114" x="255.5161" y="164.3538">carServiceType</text><ellipse cx="312.4594" cy="209.8774" fill="#F8F8F8" rx="51.7904" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="69" x="277.9594" y="213.3618">customer</text><ellipse cx="312.6602" cy="360.7982" fill="#F8F8F8" rx="71.9912" ry="16.7982" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="119" x="253.1602" y="364.2826">customerController</text><ellipse cx="120.657" cy="359.1976" fill="#F8F8F8" rx="63.988" ry="15.1976" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="100" x="70.657" y="362.682">customerRouter</text><ellipse cx="502.3071" cy="408.0276" fill="#F8F8F8" rx="65.6381" ry="15.5276" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="104" x="450.3071" y="411.512">customerService</text><ellipse cx="312.7228" cy="258.1108" fill="#F8F8F8" rx="66.0538" ry="15.6108" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="105" x="260.2228" y="261.5951">customerType</text><ellipse cx="502.112" cy="111.7886" fill="#F8F8F8" rx="79.443" ry="18.2886" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="136" x="434.112" y="115.273">customerValidator</text><ellipse cx="502.0257" cy="163.9713" fill="#F8F8F8" rx="60.3567" ry="14.4713" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="91" x="456.5257" y="167.4557">declinedTrip</text><ellipse cx="502.2817" cy="210.8774" fill="#F8F8F8" rx="34.1127" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="480.2817" y="214.3618">driver</text><ellipse cx="502.0579" cy="258.7778" fill="#F8F8F8" rx="66.8889" ry="15.7778" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="107" x="448.5579" y="262.2621">driverLocation</text><ellipse cx="502.3399" cy="595.0342" fill="#F8F8F8" rx="63.1709" ry="15.0342" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="98" x="453.3399" y="598.5186">driverService</text><ellipse cx="501.9665" cy="502.9595" fill="#F8F8F8" rx="52.7975" ry="12.9595" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="71" x="466.4665" y="506.4439">fareService</text><ellipse cx="679.0634" cy="112.0789" fill="#F8F8F8" rx="58.3944" ry="14.0789" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="86" x="636.0634" y="115.5633">fareSetting</text><ellipse cx="679.2357" cy="159.8133" fill="#F8F8F8" rx="59.5667" ry="14.3133" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="634.7357" y="163.2977">indexRouter</text><ellipse cx="679.403" cy="594.8774" fill="#F8F8F8" rx="36.234" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="47" x="655.903" y="598.3618">mapUtil</text><ellipse cx="678.9888" cy="432.8774" fill="#F8F8F8" rx="34.8198" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="45" x="656.4888" y="436.3618">models</text><ellipse cx="120.9177" cy="42.8774" fill="#F8F8F8" rx="27.7487" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="35" x="103.4177" y="46.3618">seed</text><ellipse cx="679.2357" cy="207.8133" fill="#F8F8F8" rx="59.5667" ry="14.3133" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="634.7357" y="211.2977">serviceType</text><ellipse cx="679.3172" cy="254.8774" fill="#F8F8F8" rx="37.6482" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="49" x="654.8172" y="258.3618">socket</text><ellipse cx="120.6298" cy="407.8922" fill="#F8F8F8" rx="59.9608" ry="14.3922" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="90" x="75.6298" y="411.3765">socketHandler</text><ellipse cx="312.5182" cy="20.8774" fill="#F8F8F8" rx="17.8492" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="21" x="302.0182" y="24.3618">trip</text><ellipse cx="312.5256" cy="503.7713" fill="#F8F8F8" rx="56.8566" ry="13.7713" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="82" x="271.5256" y="507.2557">tripController</text><ellipse cx="120.7167" cy="503.8774" fill="#F8F8F8" rx="47.5477" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="63" x="89.2167" y="507.3618">tripRouter</text><ellipse cx="502.0452" cy="547.8774" fill="#F8F8F8" rx="50.3762" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="67" x="468.5452" y="551.3618">tripService</text><ellipse cx="312.6477" cy="411.8957" fill="#F8F8F8" rx="54.9787" ry="13.3957" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="77" x="274.1477" y="415.3801">tripValidator</text><ellipse cx="312.7609" cy="65.8774" fill="#F8F8F8" rx="22.0919" ry="12.8774" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="27" x="299.2609" y="69.3618">user</text><ellipse cx="502.0579" cy="356.7778" fill="#F8F8F8" rx="66.8889" ry="15.7778" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="107" x="448.5579" y="360.2621">userController</text><!--MD5=[43bcfa7135e5a8864be1f8782a222312]
+link <b>app</b> to authMiddleware--><path d="M98.3989,311.565 C73.8947,312.475 35.8414,318.333 19.669,344.5 C1.4437,373.989 1.4437,393.011 19.669,422.5 C28.0711,436.095 42.2762,444.445 57.4204,449.542 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;authMiddleware" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="62.5853,451.148,55.1796,444.6552,57.811,449.6628,52.8034,452.2942,62.5853,451.148" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[3b7d3853f8d3345958b53eba4f883160]
+link <b>app</b> to customerRouter--><path d="M120.669,325.477 C120.669,329.902 120.669,334.326 120.669,338.751 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;customerRouter" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="120.669,343.945,124.669,334.945,120.669,338.945,116.669,334.945,120.669,343.945" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[282a9ef2e048bd7c31f59423e290e05b]
+link <b>app</b> to models--><path d="M141.705,307.823 C208.093,294.996 425.516,261.175 581.669,332 C621.01,349.844 652.323,391.754 667.734,415.601 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;models" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="670.602,420.117,669.1552,410.375,667.9222,415.8958,662.4013,414.6627,670.602,420.117" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[a34e07a4d8a998a7f5b2206d5a56f0a5]
+link <b>app</b> to socketHandler--><path d="M98.3989,311.565 C73.8947,312.475 35.8414,318.333 19.669,344.5 C12.6593,355.842 12.6593,363.158 19.669,374.5 C28.3388,388.528 43.2428,396.846 58.9791,401.731 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;socketHandler" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="63.8835,403.139,56.3371,396.8103,59.0777,401.759,54.1291,404.4996,63.8835,403.139" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[4cafaf73815fb8a73f8ecaaf6cef644b]
+link <b>app</b> to tripRouter--><path d="M98.3989,311.565 C73.8947,312.475 35.8414,318.333 19.669,344.5 C4.7149,368.696 4.7149,448.304 19.669,472.5 C29.952,489.138 49.1563,497.385 68.0807,501.342 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;tripRouter" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="73.4032,502.348,65.3027,496.7461,68.4902,501.4194,63.8169,504.6069,73.4032,502.348" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[611e32c7f9af1828edeb5cbbbca0217e]
+link <b>auth</b> to authController--><path d="M339.74,457.861 C364.956,457.726 404.159,457.517 437.617,457.339 " fill="none" id="&lt;b&gt;auth&lt;/b&gt;-&gt;authController" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="442.935,457.311,433.9134,453.3599,437.9351,457.3381,433.9568,461.3598,442.935,457.311" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[5a0bd8f51268615a8ffe0b6a541753c6]
+link authController to models--><path d="M553.786,450.058 C581.704,446.229 615.753,441.56 641.164,438.075 " fill="none" id="authController-&gt;models" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="646.127,437.394,636.6675,434.6523,641.1732,438.0725,637.753,442.5783,646.127,437.394" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[04d6dfb9d1038a2d33cb399414a1c2eb]
+link customerController to customerService--><path d="M362.932,373.349 C390.205,380.185 424.016,388.66 451.373,395.518 " fill="none" id="customerController-&gt;customerService" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="456.403,396.779,448.6456,390.7108,451.553,395.5633,446.7005,398.4707,456.403,396.779" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[d6940c935f5d50dc4dc53b38c15185dc]
+link customerRouter to customerController--><path d="M184.672,359.663 C200.923,359.834 218.588,360.02 235.433,360.198 " fill="none" id="customerRouter-&gt;customerController" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="240.632,360.252,231.6748,356.1571,235.6323,360.1991,231.5902,364.1566,240.632,360.252" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[082e893db8416929d6403e5d81e2157f]
+link customerService to models--><path d="M558.54,415.91 C585.558,419.77 617.321,424.307 641.326,427.737 " fill="none" id="customerService-&gt;models" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="646.326,428.451,637.9821,423.2184,641.3763,427.7439,636.8508,431.138,646.326,428.451" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[f45fe1a3dc9d6afd7b59b8114a1e8e30]
+link <b>driverService</b> to mapUtil--><path d="M565.36,595 C589.553,595 616.57,595 638.098,595 " fill="none" id="&lt;b&gt;driverService&lt;/b&gt;-&gt;mapUtil" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="643.166,595,634.166,591,638.166,595,634.166,599,643.166,595" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[789ba2d05ca04b7388d775ab91ea05cf]
+link <b>driverService</b> to models--><path d="M551.618,585.6721 C562.155,582.1951 572.793,577.4528 581.669,571 C625.928,538.8228 657.054,479.928 670.591,450.584 " fill="none" id="&lt;b&gt;driverService&lt;/b&gt;-&gt;models" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="672.763,445.799,665.4001,452.3402,670.6959,450.3517,672.6844,455.6475,672.763,445.799" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[b9b0d8a992433ae068f7a80d712cd66c]
+link <b>seed</b> to trip--><path d="M147.689,39.987 C185.217,35.642 253.903,27.689 289.287,23.592 " fill="none" id="&lt;b&gt;seed&lt;/b&gt;-&gt;trip" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="294.67,22.968,285.2693,20.0308,289.7033,23.5437,286.1904,27.9776,294.67,22.968" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[3c839bb53dbeccc920039fa37e335e00]
+link <b>seed</b> to user--><path d="M147.689,46.15 C184.015,50.547 249.536,58.479 285.787,62.867 " fill="none" id="&lt;b&gt;seed&lt;/b&gt;-&gt;user" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="290.917,63.488,282.4636,58.4343,285.9533,62.8865,281.5011,66.3762,290.917,63.488" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[4eb7d5b2613f69d63eb12170f6b14f3c]
+link tripController to fareService--><path d="M369.671,503.701 C393.046,503.577 420.18,503.432 443.708,503.306 " fill="none" id="tripController-&gt;fareService" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="448.981,503.278,439.9594,499.3269,443.9811,503.3051,440.0028,507.3268,448.981,503.278" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[6c653562fba6e20a2d710dd791fab616]
+link tripController to tripService--><path d="M354.817,513.656 C385.821,520.9318 428.175,530.8708 459.344,538.185 " fill="none" id="tripController-&gt;tripService" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="464.247,539.3355,456.3995,533.3843,459.3794,538.1927,454.571,541.1726,464.247,539.3355" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[1e050d5f060103460c5c2750fafc8492]
+link tripRouter to tripController--><path d="M168.635,504 C193.258,504 223.723,504 250.2,504 " fill="none" id="tripRouter-&gt;tripController" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="255.44,504,246.44,500,250.44,504,246.44,508,255.44,504" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[229d83ec223669a544663cd2b8fad5bc]
+link tripRouter to tripValidator--><path d="M162.847,497.947 C176.284,494.674 190.79,489.661 202.669,482 C224.955,467.628 218.83,451.042 240.669,436 C248.608,430.532 257.898,426.219 267.093,422.85 " fill="none" id="tripRouter-&gt;tripValidator" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="271.884,421.173,262.0679,420.3706,267.1647,422.8247,264.7106,427.9215,271.884,421.173" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[10afd44193eadc9ba9f73f4a214bc1a1]
+link tripService to models--><path d="M544.224,540.5565 C556.763,537.2334 570.247,532.5413 581.669,526 C616.687,505.946 648.549,470.378 665.459,449.522 " fill="none" id="tripService-&gt;models" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="668.638,445.556,659.888,450.0768,665.5109,449.4574,666.1303,455.0803,668.638,445.556" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[93bb0872296cfab454077b84ad419d9c]
+link <b>userController</b> to models--><path d="M544.771,369.421 C556.82,373.382 569.895,378.037 581.669,383 C607.315,393.811 635.443,408.763 654.68,419.495 " fill="none" id="&lt;b&gt;userController&lt;/b&gt;-&gt;models" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="659.372,422.127,653.4804,414.2347,655.0115,419.6804,649.5658,421.2115,659.372,422.127" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[76d4488893ee5657b1a33f2a41b325a0]
+link <b>1-create-car</b> to <b>2-create-car-brand</b>--><!--MD5=[6a74dd65677ab57b8b600fab77366fc8]
+link <b>2-create-car-brand</b> to <b>authentication</b>--><!--MD5=[1515660167617d4b5080e66d1cfcd538]
+link <b>authentication</b> to <b>car</b>--><!--MD5=[b767f507afca3aba62e0e557d62fde89]
+link <b>1-create-car</b> to <b>carBrand</b>--><!--MD5=[9d75be6842ee38e1718c878e9d951aea]
+link <b>carBrand</b> to <b>carServiceType</b>--><!--MD5=[c202934c8616c5e5c1a9659b1f7fd9ac]
+link <b>carServiceType</b> to <b>customer</b>--><!--MD5=[0993a70b9daeb23f99c6e96ed7a69244]
+link <b>customer</b> to <b>customerType</b>--><!--MD5=[e1f611a523e6cd0b9b582ddeccb949e3]
+link <b>carBrand</b> to <b>customerValidator</b>--><!--MD5=[0a35e38294fbaeffe6791f677908a724]
+link <b>customerValidator</b> to <b>declinedTrip</b>--><!--MD5=[147349d1bed6fce0f45ab354d468e907]
+link <b>declinedTrip</b> to <b>driver</b>--><!--MD5=[3aaa3ba24f452668979112bec42f4fd3]
+link <b>driver</b> to <b>driverLocation</b>--><!--MD5=[c4577109bda6e93d00f7e87ef7108323]
+link <b>customerValidator</b> to <b>fareSetting</b>--><!--MD5=[af572c366b5f10247fedc96cd3f64e99]
+link <b>fareSetting</b> to <b>indexRouter</b>--><!--MD5=[18c4d92920e2ab90f2cfa3ce4d8443a6]
+link <b>indexRouter</b> to <b>serviceType</b>--><!--MD5=[c39c698f633b19b5cbd059e5e4e0e2ba]
+link <b>serviceType</b> to <b>socket</b>--><script type="text/plantuml"><![CDATA[MD5=[92e86ded312ce2e0e5e0b9490bb41763]
+@startuml
+
+scale max 1920 width
+left to right direction
+
+skinparam nodesep 19
+skinparam ranksep 38
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Tahoma
+skinparam defaultFontSize 12
+skinparam roundCorner 6
+skinparam dpi 150
+skinparam arrowColor black
+skinparam arrowThickness 0.5
+skinparam packageTitleAlignment left
+
+skinparam usecase {
+  borderThickness 0.5
+}
+
+skinparam rectangle {
+  borderThickness 0.5
+}
+
+skinparam component {
+  borderThickness 1
+}
+
+
+(<b>1-create-car</b>)
+(<b>2-create-car-brand</b>)
+(<b>app</b>)
+(<b>auth</b>)
+(authController)
+(<b>authentication</b>)
+(authMiddleware)
+(<b>car</b>)
+(<b>carBrand</b>)
+(<b>carServiceType</b>)
+(<b>customer</b>)
+(customerController)
+(customerRouter)
+(customerService)
+(<b>customerType</b>)
+(<b>customerValidator</b>)
+(<b>declinedTrip</b>)
+(<b>driver</b>)
+(<b>driverLocation</b>)
+(<b>driverService</b>)
+(fareService)
+(<b>fareSetting</b>)
+(<b>indexRouter</b>)
+(mapUtil)
+(models)
+(<b>seed</b>)
+(<b>serviceType</b>)
+(<b>socket</b>)
+(socketHandler)
+(trip)
+(tripController)
+(tripRouter)
+(tripService)
+(tripValidator)
+(user)
+(<b>userController</b>)
+
+
+(<b>app</b>) -[thickness=1]> (authMiddleware)
+(<b>app</b>) -[thickness=1]> (customerRouter)
+(<b>app</b>) -[thickness=1]> (models)
+(<b>app</b>) -[thickness=1]> (socketHandler)
+(<b>app</b>) -[thickness=1]> (tripRouter)
+(<b>auth</b>) --[thickness=1]> (authController)
+(authController) --> (models)
+(customerController) --> (customerService)
+(customerRouter) --> (customerController)
+(customerService) --> (models)
+(<b>driverService</b>) --[thickness=1]> (mapUtil)
+(<b>driverService</b>) --[thickness=1]> (models)
+(<b>seed</b>) --[thickness=1]> (trip)
+(<b>seed</b>) --[thickness=1]> (user)
+(tripController) --> (fareService)
+(tripController) --> (tripService)
+(tripRouter) --> (tripController)
+(tripRouter) --> (tripValidator)
+(tripService) --> (models)
+(<b>userController</b>) --[thickness=1]> (models)
+
+@enduml
+
+
+' View and edit on https://arkit.pro
+]]></script></g></svg>

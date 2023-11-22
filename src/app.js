@@ -4,13 +4,18 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
-const tripRoutes = require('./routes/tripRouter');
+const tripRouters = require('./routes/tripRouter');
+const customerRouters = require('./routes/customerRouter');
 const { sequelize } = require('./models');
 const socketHandler = require('./socket/socketHandler');
+const authenticateRequest = require('./middlewares/authMiddleware');
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
+
+// Attach the authenticateRequest middleware to all routes
+app.use(authenticateRequest);
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -24,7 +29,8 @@ app.use((req, res, next) => {
 app.io = io;
 
 // Use trip routes
-app.use('/api/trips', tripRoutes);
+app.use('/api/trips', tripRouters);
+app.use('/api/customers', customerRouters);
 
 // Handle the Socket connection
 socketHandler(io);
