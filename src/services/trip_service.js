@@ -11,16 +11,36 @@ const createTrip = async (tripData) => {
 
 const getTripById = async (tripId) => {
     try {
-        const trip = await models.Trip.findByPk(tripId);
+        const trip = await models.Trip.findByPk(tripId,
+            {
+                include: [
+                    {
+                        model: models.Driver,
+                        attributes: ['id', 'name', 'phoneNumber', 'licensePlateNumber', 'rating', 'avatarUrl', 'status'],
+                        include: [
+                            {
+                                model: models.DriverLocation,
+                                attributes: ['lat', 'long', 'updatedAt'],
+                                order: [['updatedAt', 'DESC']],
+                                limit: 1,
+                            }
+                        ]
+                    },
+                    {
+                        model: models.Customer,
+                        attributes: ['id', 'name', 'phoneNumber', 'email', 'homeAddress', 'homeAddressLat', 'homeAddressLong', 'walletBalance', 'avatarUrl'],
+                    },
+                ],
+            });
         return trip;
     } catch (error) {
         throw new Error('Error getting trip by ID: ' + error.message);
     }
 };
 
-const updateTrip = async (tripId, updatedTripData) => {
+const updateTrip = async (updatedTripData) => {
     try {
-        const trip = await models.Trip.findByPk(tripId);
+        const trip = await models.Trip.findByPk(updatedTripData.id);
         if (!trip) {
             throw new Error('Trip not found');
         }

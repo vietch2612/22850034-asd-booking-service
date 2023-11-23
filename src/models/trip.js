@@ -4,6 +4,10 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Trip extends Model {
+        static associate(models) {
+            Trip.belongsTo(models.Driver, { foreignKey: 'driverId' });
+            Trip.belongsTo(models.Customer, { foreignKey: 'customerId' });
+        }
     }
     Trip.init({
         id: {
@@ -33,19 +37,19 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         pickupLocationLat: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DOUBLE,
             allowNull: true,
         },
         pickupLocationLong: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DOUBLE,
             allowNull: true,
         },
         dropoffLocationLat: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DOUBLE,
             allowNull: false,
         },
         dropoffLocationLong: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DOUBLE,
             allowNull: false,
         },
         dropoffLocation: {

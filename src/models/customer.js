@@ -37,11 +37,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         homeAddressLat: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DOUBLE,
             allowNull: true
         },
         homeAddressLong: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DOUBLE,
             allowNull: true
         },
         walletBalance: {

@@ -30,19 +30,19 @@ module.exports = {
                 allowNull: false,
             },
             pickupLocationLat: {
-                type: Sequelize.DECIMAL,
+                type: Sequelize.DOUBLE,
                 allowNull: true,
             },
             pickupLocationLong: {
-                type: Sequelize.DECIMAL,
+                type: Sequelize.DOUBLE,
                 allowNull: true,
             },
             dropoffLocationLat: {
-                type: Sequelize.DECIMAL,
+                type: Sequelize.DOUBLE,
                 allowNull: false,
             },
             dropoffLocationLong: {
-                type: Sequelize.DECIMAL,
+                type: Sequelize.DOUBLE,
                 allowNull: false,
             },
             dropoffLocation: {

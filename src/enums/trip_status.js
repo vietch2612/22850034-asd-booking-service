@@ -1,4 +1,3 @@
-module.exports = TripStatus;
 const TripStatus = {
     SUBMITTED: 0,
     ALLOCATED: 1,

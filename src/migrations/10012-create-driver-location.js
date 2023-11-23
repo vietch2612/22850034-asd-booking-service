@@ -20,11 +20,11 @@ module.exports = {
                 onDelete: 'CASCADE',
             },
             lat: {
-                type: Sequelize.DECIMAL,
+                type: Sequelize.DOUBLE,
                 allowNull: false,
             },
             long: {
-                type: Sequelize.DECIMAL,
+                type: Sequelize.DOUBLE,
                 allowNull: false,
             },
             createdAt: {

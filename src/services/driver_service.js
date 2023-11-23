@@ -1,45 +1,84 @@
-const calculateDistance = require('../utils/mapUtil');
-const { DriverLocation } = require('../models');
+const calculateDistance = require('../utils/map_utils');
+const { DriverLocation, Driver, DeclinedTrip, Trip } = require('../models');
+const DriverStatus = require('../enums/driver_status');
+const TripStatus = require('../enums/trip_status');
+const { Op } = require('sequelize');
 
 async function findNearestDriver(trip) {
     const pickupLocationLat = trip.pickupLocationLat;
     const pickupLocationLong = trip.pickupLocationLong;
     const maxDistanceInKm = 5; // Maximum distance in kilometers
 
-    const drivers = await DriverLocation.findAll({
-        attributes: ['driverId', 'lat', 'long'],
-        include: [{
-            model: Driver,
-            where: { status: 'Active' },
-            attributes: ['status'],
-        }, {
-            model: DeclinedTrip,
-            where: { tripId: trip.id },
-            required: false,
-        }],
-        where: {
-            '$DeclinedTrips.driverId$': null,
-        },
-    });
+    try {
+        const drivers = await DriverLocation.findAll({
+            attributes: ['driverId', 'lat', 'long'],
+            include: [
+                {
+                    model: Driver,
+                    attributes: ['status'],
+                    where: { status: DriverStatus.ACTIVE },
+                    include: [
+                        {
+                            model: DeclinedTrip,
+                            attributes: [],
+                            where: { tripId: trip.id },
+                            required: false,
+                        }
+                    ],
+                },
+            ],
+            order: [['updatedAt', 'DESC']],
+            group: ['Driver.id', 'DriverLocation.id', 'DriverLocation.driverId', 'DriverLocation.lat', 'DriverLocation.long'],
+        });
 
-    let nearestDriver;
-    let minDistance = maxDistanceInKm;
+        if (drivers.length > 0) {
+            let nearestDriver;
+            let minDistance = maxDistanceInKm;
 
-    for (const driver of drivers) {
-        const distance = calculateDistance(pickupLocationLat, pickupLocationLong, driver.lat, driver.long);
-        if (distance < minDistance) {
-            minDistance = distance;
-            nearestDriver = driver;
+            for (const driver of drivers) {
+                const distance = calculateDistance(pickupLocationLat, pickupLocationLong, driver.lat, driver.long);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearestDriver = driver;
+                }
+            }
+
+            if (nearestDriver) {
+                console.log('Nearest Driver within 5 km:', nearestDriver.toJSON());
+            } else {
+                console.log('No drivers found within 5 km.');
+            }
+
+            return nearestDriver;
+        } else {
+            console.log('No available drivers.');
+            return null;
         }
+    } catch (error) {
+        console.error('Error finding nearest driver:', error.message);
+        return null;
     }
-
-    if (minDistance <= maxDistanceInKm) {
-        console.log('Nearest Driver within 5 km:', nearestDriver);
-    } else {
-        console.log('No drivers found within 5 km.');
-    }
-
-    return nearestDriver;
 }
 
-module.exports = { findNearestDriver };
+async function getDriverById(driverId) {
+    return await Driver.findByPk(driverId);
+}
+
+async function updateDriver(driverData, newLocation) {
+    // Update driver information
+    await Driver.update(driverData, { where: { id: driverData.id } });
+
+    if (newLocation) {
+        await DriverLocation.create({
+            driverId: driverData.id,
+            lat: newLocation.lat,
+            long: newLocation.long,
+        });
+    }
+
+    // Retrieve and return the updated driver
+    const updatedDriver = await Driver.findByPk(driverData.id);
+    return updatedDriver;
+}
+
+module.exports = { findNearestDriver, getDriverById, updateDriver };

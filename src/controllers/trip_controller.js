@@ -1,20 +1,26 @@
-const express = require('express');
-const router = express.Router();
+const FareService = require('../services/fare_service');
 const tripService = require('../services/trip_service'); // Adjust the path based on your project structure
+const { validateTripData } = require('../validators/trip_validator'); // Adjust the path based on your project structure
 
-// POST /trips
-router.post('/trips', validateTripData, async (req, res) => {
+async function createTrip(req, res) {
     try {
+        validateTripData(req, res);
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
         const tripData = req.body; // Assuming you have the trip data in the request body
         const newTrip = await tripService.createTrip(tripData);
         res.status(201).json(newTrip);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-});
+}
 
-// GET /trips/:id
-router.get('/trips/:id', async (req, res) => {
+async function getTripById(req, res) {
     try {
         const tripId = req.params.id;
         const trip = await tripService.getTripById(tripId);
@@ -25,12 +31,23 @@ router.get('/trips/:id', async (req, res) => {
             res.status(200).json(trip);
         }
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-});
+}
 
-// PUT /trips/:id
-router.put('/trips/:id', async (req, res) => {
+async function getAllTrips(req, res) {
+    try {
+        const trips = await tripService.getAllTrips();
+        res.status(200).json(trips);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
+async function updateTrip(req, res) {
     try {
         const tripId = req.params.id;
         const updatedTripData = req.body;
@@ -38,8 +55,28 @@ router.put('/trips/:id', async (req, res) => {
         const updatedTrip = await tripService.updateTrip(tripId, updatedTripData);
         res.status(200).json(updatedTrip);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-});
+}
 
-module.exports = router;
+async function calculateFare(req, res) {
+    try {
+        const tripData = req.body;
+        const fare = await FareService.calculateFare(tripData.length);
+        res.status(200).json({ fare: fare });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+// Add more functions as needed
+
+module.exports = {
+    createTrip,
+    getTripById,
+    updateTrip,
+    getAllTrips,
+    calculateFare
+};

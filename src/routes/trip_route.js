@@ -1,12 +1,11 @@
-// routes/trip.js
 const express = require('express');
 const router = express.Router();
-const tripController = require('../controllers/tripController');
-const tripValidator = require('../validators/tripValidator');
+const tripController = require('../controllers/trip_controller');
+const tripValidator = require('../validators/trip_validator');
 
 router.get('/', tripController.getAllTrips)
-router.post('/', validator.validateCreateTrip, tripController.createTripController);
-
-router.post('/calculate-fare', tripValidator.validateCalculateTripFare, tripController.calculateFareController);
+router.get('/:id', tripController.getTripById)
+router.post('/', tripValidator.validateTripData, tripController.createTrip);
+router.post('/calculate-fare', tripController.calculateFare);
 
 module.exports = router;
