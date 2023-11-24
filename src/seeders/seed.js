@@ -22,7 +22,7 @@ const seedData = async () => {
         await sequelize.models.FareSetting.bulkCreate([
             { startKm: 0, endKm: 1, pricePerKm: 11000 },
             { startKm: 1, endKm: 10, pricePerKm: 10000 },
-            { startKm: 10, endKm: null, pricePerKm: 7000 },
+            { startKm: 10, endKm: 1000000, pricePerKm: 7000 },
         ]);
 
         // Service Types

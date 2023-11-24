@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         startKm: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: false,
         },
         endKm: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: true
         },
         pricePerKm: {

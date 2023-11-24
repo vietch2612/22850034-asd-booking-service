@@ -2,6 +2,7 @@ const tripService = require('../services/trip_service');
 const driverService = require('../services/driver_service');
 const TripStatus = require('../enums/trip_status');
 const TripEvent = require('../enums/trip_event');
+const SocketService = require('../socket/socket_service');
 
 module.exports = (socket, io) => {
 
@@ -14,11 +15,10 @@ module.exports = (socket, io) => {
         try {
             const newTrip = await tripService.createTrip(tripData);
 
-            socket.join(newTrip.id);
-            socket.emit(TripEvent.TRIP_PASSENGER_SUBMIT, newTrip.toJSON());
+            await socket.join(newTrip.id);
+            await socket.emit(TripEvent.TRIP_PASSENGER_SUBMIT, newTrip.toJSON());
 
-            const selectedDriver = driverService.findNearestDriver(newTrip);
-            console.log(selectedDriver.toJSON());
+            await SocketService.findNewDriver(socket, io, newTrip);
 
             console.log(`[Socket]: Received a new trip ${newTrip.id}`);
         } catch (error) {

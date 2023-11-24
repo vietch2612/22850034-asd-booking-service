@@ -1,27 +1,28 @@
 const { sequelize } = require('../models');
 
 class FareService {
-    static async calculateFare(distance) {
+    static calculateFare = async (tripLength) => {
         try {
-            // Fetch fare settings based on the distance
-            const fareSetting = await sequelize.models.FareSetting.findOne({
-                where: {
-                    startKm: { [sequelize.Sequelize.lte]: distance },
-                    endKm: { [sequelize.Sequelize.or]: [{ [sequelize.Sequelize.gt]: distance }, null] },
-                },
-                order: [['startKm', 'DESC']], // Assuming you want the highest range that matches the distance
-            });
+            // Fetch fare settings from the database
+            const fareSettings = await sequelize.models.FareSetting.findAll();
 
-            if (!fareSetting) {
-                throw new Error('No fare setting found for the given distance.');
+            // Calculate total fare based on provided trip length
+            let totalFare = 0;
+            let remainingDistance = tripLength;
+
+            for (const setting of fareSettings) {
+                if (remainingDistance > 0) {
+                    const distanceToCharge = Math.min(remainingDistance, setting.endKm - setting.startKm);
+                    totalFare += distanceToCharge * setting.pricePerKm;
+                    remainingDistance -= distanceToCharge;
+                } else {
+                    break; // Exit loop if we've covered the entire trip length
+                }
             }
 
-            // Apply pricing logic
-            const fare = fareSetting.pricePerKm * distance;
-
-            return fare;
+            return totalFare;
         } catch (error) {
-            console.error('Error calculating fare:', error);
+            console.error('Error calculating trip fare:', error);
             throw error;
         }
     }
