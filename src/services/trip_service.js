@@ -23,6 +23,10 @@ const getTripById = async (tripId) => {
                                 attributes: ['lat', 'long', 'updatedAt'],
                                 order: [['updatedAt', 'DESC']],
                                 limit: 1,
+                            },
+                            {
+                                model: models.Car,
+                                attributes: ['name']
                             }
                         ]
                     },

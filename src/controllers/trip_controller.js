@@ -63,7 +63,7 @@ async function updateTrip(req, res) {
 async function calculateFare(req, res) {
     try {
         const tripData = req.body;
-        const fare = await FareService.calculateFare(tripData.length);
+        const fare = await FareService.calculateFare(tripData.length / 1000);
         console.log(tripData.length);
         res.status(200).json({ fare: fare });
     } catch (error) {
