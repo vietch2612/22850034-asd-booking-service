@@ -45,6 +45,7 @@ const getTripById = async (tripId) => {
 const getAllTrips = async () => {
     try {
         const trips = await models.Trip.findAll({
+            order: [['id', 'DESC']],
             include: [
                 {
                     model: models.Driver,

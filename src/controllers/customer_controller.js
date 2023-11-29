@@ -47,7 +47,8 @@ async function createCustomer(req, res) {
             phoneNumber: customerData.phoneNumber,
             name: customerData.name,
             email: "randomemailtesting@yopmail.com",
-            customerTypeId: 1
+            customerTypeId: 1,
+            avatarUrl: "https://i.pravatar.cc/100",
         });
         res.status(201).json(newCustomer);
     } catch (error) {

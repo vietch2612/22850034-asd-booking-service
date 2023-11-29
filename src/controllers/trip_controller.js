@@ -1,18 +1,16 @@
 const FareService = require('../services/fare_service');
 const tripService = require('../services/trip_service'); // Adjust the path based on your project structure
+const SocketService = require('../socket/socket_service');
 const { validateTripData } = require('../validators/trip_validator'); // Adjust the path based on your project structure
 
 async function createTrip(req, res) {
     try {
-        validateTripData(req, res);
-
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-
         const tripData = req.body; // Assuming you have the trip data in the request body
         const newTrip = await tripService.createTrip(tripData);
+
+        const io = req.app.io;
+        SocketService.findNewDriver(null, io, newTrip);
+
         res.status(201).json(newTrip);
     } catch (error) {
         console.error(error);
