@@ -1,10 +1,13 @@
 const { sequelize } = require('../models');
 
 class FareService {
-    static calculateFare = async (tripLength) => {
+    static calculateFare = async (tripLength, serviceTypeId) => {
         try {
             // Fetch fare settings from the database
             const fareSettings = await sequelize.models.FareSetting.findAll();
+            const serviceType = await sequelize.models.ServiceType.findByPk(serviceTypeId, {
+                attributes: ['surcharge'],
+            });
 
             // Calculate total fare based on provided trip length
             let totalFare = 0;
@@ -20,7 +23,7 @@ class FareService {
                 }
             }
 
-            return totalFare;
+            return totalFare + totalFare * serviceType.surcharge / 100;
         } catch (error) {
             console.error('Error calculating trip fare:', error);
             throw error;

@@ -9,6 +9,7 @@ async function getCustomerById(customerId) {
 }
 
 async function searchCustomerPhone(phoneNumber) {
+    console.log("searching customer by phone number: ", phoneNumber);
     return await Customer.findAll({
         where: {
             phoneNumber: phoneNumber,

@@ -15,8 +15,6 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-app.use(authenticateRequest);
-
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -28,6 +26,9 @@ app.use((req, res, next) => {
 
 // Init socket connection
 app.io = io;
+
+app.use(authenticateRequest);
+
 
 /** Route management */
 app.use('/api/trips', tripRoutes);

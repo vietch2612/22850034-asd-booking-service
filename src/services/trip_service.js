@@ -42,6 +42,42 @@ const getTripById = async (tripId) => {
     }
 };
 
+const getAllTrips = async () => {
+    try {
+        const trips = await models.Trip.findAll({
+            include: [
+                {
+                    model: models.Driver,
+                    attributes: ['id', 'name', 'phoneNumber', 'licensePlateNumber', 'rating', 'avatarUrl', 'status'],
+                    include: [
+                        {
+                            model: models.DriverLocation,
+                            attributes: ['lat', 'long', 'updatedAt'],
+                            order: [['updatedAt', 'DESC']],
+                            limit: 1,
+                        },
+                        {
+                            model: models.Car,
+                            attributes: ['name']
+                        }
+                    ]
+                },
+                {
+                    model: models.Customer,
+                    attributes: ['id', 'name', 'phoneNumber', 'email', 'homeAddress', 'homeAddressLat', 'homeAddressLong', 'walletBalance', 'avatarUrl'],
+                },
+                {
+                    model: models.ServiceType,
+                    attributes: ['name', 'numberOfSeat']
+                }
+            ],
+        });
+        return trips;
+    } catch (error) {
+        throw new Error('Error getting all trips: ' + error.message);
+    }
+};
+
 const updateTrip = async (updatedTripData) => {
     try {
         const trip = await models.Trip.findByPk(updatedTripData.id);
@@ -60,4 +96,5 @@ module.exports = {
     createTrip,
     getTripById,
     updateTrip,
+    getAllTrips
 };

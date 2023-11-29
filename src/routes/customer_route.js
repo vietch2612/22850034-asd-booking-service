@@ -4,9 +4,9 @@ const express = require('express');
 const router = express.Router();
 const customerController = require('../controllers/customer_controller');
 
-router.get('/customers', customerController.getAllCustomers);
-router.get('/customers/:id', customerController.getCustomerById);
-router.get('/customers/search', customerController.searchCustomerPhone);
-router.post('/customers', customerController.createCustomer);
+router.get('/', customerController.getAllCustomers);
+router.post('/', customerController.createCustomer);
+router.get('/search', customerController.searchCustomerPhone);
+router.get('/:id', customerController.getCustomerById);
 
 module.exports = router;

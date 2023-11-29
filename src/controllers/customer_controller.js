@@ -30,6 +30,7 @@ async function getCustomerById(req, res) {
 
 async function searchCustomerPhone(req, res) {
     try {
+        console.log(req.query);
         const phoneNumber = req.query.phone;
         const customers = await customerService.searchCustomerPhone(phoneNumber);
         res.status(200).json(customers);

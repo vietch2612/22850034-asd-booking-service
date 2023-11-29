@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             Trip.belongsTo(models.Driver, { foreignKey: 'driverId' });
             Trip.belongsTo(models.Customer, { foreignKey: 'customerId' });
+            Trip.belongsTo(models.ServiceType, { foreignKey: 'serviceTypeId' });
         }
     }
     Trip.init({
