@@ -42,15 +42,13 @@ async function searchCustomerPhone(req, res) {
 
 async function createCustomer(req, res) {
     try {
-        createCustomerValidator(req, res);
-
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-
         const customerData = req.body;
-        const newCustomer = await customerService.createCustomer(customerData);
+        const newCustomer = await customerService.createCustomer({
+            phoneNumber: customerData.phoneNumber,
+            name: customerData.name,
+            email: "randomemailtesting@yopmail.com",
+            customerTypeId: 1
+        });
         res.status(201).json(newCustomer);
     } catch (error) {
         console.error(error);
