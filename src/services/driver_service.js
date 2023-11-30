@@ -15,7 +15,7 @@ async function findNearestDriver(trip) {
             include: [
                 {
                     model: Driver,
-                    attributes: ['status'],
+                    attributes: ['status', 'name', 'phoneNumber', 'licensePlateNumber', 'rating', 'avatarUrl', 'carId'],
                     where: { status: DriverStatus.ACTIVE },
                     include: [
                         {

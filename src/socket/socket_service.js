@@ -13,6 +13,8 @@ class SocketService {
             io.to(roomId).emit(TripEvent.TRIP_DRIVER_ALLOCATE, newTrip.toJSON());
             console.log('Found a driver: ', roomId);
         }
+
+        return selectedDriver
     }
 
     static async notifyAllocated(socket, trip, io) {

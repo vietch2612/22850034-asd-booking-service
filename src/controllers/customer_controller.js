@@ -1,5 +1,3 @@
-// customerController.js
-
 const customerService = require('../services/customer_service');
 
 async function getAllCustomers(req, res) {

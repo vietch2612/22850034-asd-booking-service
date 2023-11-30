@@ -2,7 +2,30 @@ const models = require('../models'); // Adjust the path based on your project st
 
 const createTrip = async (tripData) => {
     try {
-        const trip = await models.Trip.create(tripData);
+        const trip = await models.Trip.create(tripData, {
+            include: [
+                {
+                    model: models.Driver,
+                    attributes: ['id', 'name', 'phoneNumber', 'licensePlateNumber', 'rating', 'avatarUrl', 'status'],
+                    include: [
+                        {
+                            model: models.DriverLocation,
+                            attributes: ['lat', 'long', 'updatedAt'],
+                            order: [['updatedAt', 'DESC']],
+                            limit: 1,
+                        },
+                        {
+                            model: models.Car,
+                            attributes: ['name']
+                        }
+                    ]
+                },
+                {
+                    model: models.Customer,
+                    attributes: ['id', 'name', 'phoneNumber', 'email', 'homeAddress', 'homeAddressLat', 'homeAddressLong', 'walletBalance', 'avatarUrl'],
+                },
+            ],
+        });
         return trip;
     } catch (error) {
         throw new Error('Error creating trip: ' + error.message);

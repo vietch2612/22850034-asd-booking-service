@@ -1,15 +1,32 @@
 const FareService = require('../services/fare_service');
-const tripService = require('../services/trip_service'); // Adjust the path based on your project structure
+const SmsService = require('../services/sms_service');
+const tripService = require('../services/trip_service');
 const SocketService = require('../socket/socket_service');
-const { validateTripData } = require('../validators/trip_validator'); // Adjust the path based on your project structure
+const customerService = require('../services/customer_service');
 
 async function createTrip(req, res) {
     try {
         const tripData = req.body; // Assuming you have the trip data in the request body
         const newTrip = await tripService.createTrip(tripData);
+        console.log(newTrip.toJSON());
+
+        const customer = await customerService.getCustomerById(tripData.customerId);
+
+        if (customer) {
+            const message = `Ban da dat thanh cong chuyen di ${newTrip.id}`;
+            SmsService.sendSmsNotification(customer.phoneNumber
+                , message);
+        }
 
         const io = req.app.io;
-        SocketService.findNewDriver(null, io, newTrip);
+        const selectDriverLocation = await SocketService.findNewDriver(null, io, newTrip);
+        const driver = selectDriverLocation.Driver;
+
+        if (driver != null) {
+            const message = `Da tim thay xe. Ten tai xe: ${driver.name}, SDT: ${driver.phoneNumber}, Bien so xe: ${driver.licensePlateNumber}`;
+            SmsService.sendSmsNotification(customer.phoneNumber
+                , message);
+        }
 
         res.status(201).json(newTrip);
     } catch (error) {
