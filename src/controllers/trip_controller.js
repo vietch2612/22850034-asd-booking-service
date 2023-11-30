@@ -13,7 +13,7 @@ async function createTrip(req, res) {
         const customer = await customerService.getCustomerById(tripData.customerId);
 
         if (customer) {
-            const message = `Ban da dat thanh cong chuyen di ${newTrip.id}`;
+            const message = `Ban da dat thanh cong chuyen di ${newTrip.id}. Diem don: ${newTrip.pickupLocation}. Tong tien: ${newTrip.fare}`;
             SmsService.sendSmsNotification(customer.phoneNumber
                 , message);
         }
@@ -23,7 +23,7 @@ async function createTrip(req, res) {
         const driver = selectDriverLocation.Driver;
 
         if (driver != null) {
-            const message = `Da tim thay xe. Ten tai xe: ${driver.name}, SDT: ${driver.phoneNumber}, Bien so xe: ${driver.licensePlateNumber}`;
+            const message = `Da co Tai xe. Ten TX: ${driver.name}, SDT: ${driver.phoneNumber}, Bien So: ${driver.licensePlateNumber}`;
             SmsService.sendSmsNotification(customer.phoneNumber
                 , message);
         }
