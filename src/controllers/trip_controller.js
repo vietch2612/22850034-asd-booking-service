@@ -87,8 +87,6 @@ async function calculateFare(req, res) {
     }
 }
 
-// Add more functions as needed
-
 module.exports = {
     createTrip,
     getTripById,
