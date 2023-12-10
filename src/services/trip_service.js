@@ -116,9 +116,19 @@ const updateTrip = async (updatedTripData) => {
     }
 };
 
+const newDeclinedTrip = async (declinedTripData) => {
+    try {
+        const declinedTrip = await models.DeclinedTrip.create(declinedTripData);
+        return declinedTrip;
+    } catch (error) {
+        throw new Error('Error creating declined trip: ' + error.message);
+    }
+};
+
 module.exports = {
     createTrip,
     getTripById,
     updateTrip,
-    getAllTrips
+    getAllTrips,
+    newDeclinedTrip
 };

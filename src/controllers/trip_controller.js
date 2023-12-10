@@ -20,13 +20,6 @@ async function createTrip(req, res) {
 
         const io = req.app.io;
         const selectDriverLocation = await SocketService.findNewDriver(null, io, newTrip);
-        const driver = selectDriverLocation.Driver;
-
-        if (driver != null) {
-            const message = `Da co Tai xe. Ten TX: ${driver.name}, SDT: ${driver.phoneNumber}, Bien So: ${driver.licensePlateNumber}`;
-            SmsService.sendSmsNotification(customer.phoneNumber
-                , message);
-        }
 
         res.status(201).json(newTrip);
     } catch (error) {

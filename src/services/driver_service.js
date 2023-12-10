@@ -2,7 +2,7 @@ const calculateDistance = require('../utils/map_utils');
 const { DriverLocation, Driver, DeclinedTrip, Trip } = require('../models');
 const DriverStatus = require('../enums/driver_status');
 const TripStatus = require('../enums/trip_status');
-const { Op } = require('sequelize');
+const { Sequelize, Op } = require('sequelize');
 
 async function findNearestDriver(trip) {
     const pickupLocationLat = trip.pickupLocationLat;
@@ -16,15 +16,7 @@ async function findNearestDriver(trip) {
                 {
                     model: Driver,
                     attributes: ['status', 'name', 'phoneNumber', 'licensePlateNumber', 'rating', 'avatarUrl', 'carId'],
-                    where: { status: DriverStatus.ACTIVE },
-                    include: [
-                        {
-                            model: DeclinedTrip,
-                            attributes: [],
-                            where: { tripId: trip.id },
-                            required: false,
-                        }
-                    ],
+                    where: Sequelize.literal(`"Driver"."id" NOT IN (SELECT "driverId" FROM "DeclinedTrips" WHERE "tripId" = ${trip.id}) AND "Driver"."status" = ${DriverStatus.ACTIVE}`),
                 },
             ],
             order: [['updatedAt', 'DESC']],
