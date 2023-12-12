@@ -1,4 +1,6 @@
 const { Customer } = require('../models');
+const { CustomerType } = require('../models');
+
 
 async function getAllCustomers() {
     return await Customer.findAll();
@@ -14,6 +16,12 @@ async function searchCustomerPhone(phoneNumber) {
         where: {
             phoneNumber: phoneNumber,
         },
+        include: [
+            {
+                model: CustomerType,
+                attributes: ['id', 'name'],
+            },
+        ],
     });
 }
 

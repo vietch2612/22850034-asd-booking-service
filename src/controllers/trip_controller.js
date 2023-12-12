@@ -1,25 +1,28 @@
 const FareService = require('../services/fare_service');
-const SmsService = require('../services/sms_service');
-const tripService = require('../services/trip_service');
 const SocketService = require('../socket/socket_service');
-const customerService = require('../services/customer_service');
+const SmsService = require('../services/sms_service');
+
+const tripService = require('../services/trip_service');
+const schedule = require('node-schedule');
+
 
 async function createTrip(req, res) {
     try {
-        const tripData = req.body; // Assuming you have the trip data in the request body
+        const tripData = req.body;
         const newTrip = await tripService.createTrip(tripData);
-        console.log(newTrip.toJSON());
-
-        const customer = await customerService.getCustomerById(tripData.customerId);
-
-        if (customer) {
-            const message = `Ban da dat thanh cong chuyen di ${newTrip.id}. Diem don: ${newTrip.pickupLocation}. Tong tien: ${newTrip.fare}`;
-            SmsService.sendSmsNotification(customer.phoneNumber
-                , message);
-        }
+        console.log("Received a new trip from Admin: ", newTrip.toJSON());
 
         const io = req.app.io;
-        const selectDriverLocation = await SocketService.findNewDriver(null, io, newTrip);
+
+        if (tripData.scheduleTime != null) {
+            const scheduleTime = new Date(tripData.scheduleTime);
+            const scheduleId = `TRIP_${newTrip.id}`;
+            schedule.scheduleJob(scheduleId, scheduleTime, async () => {
+                await SocketService.findNewDriver(null, io, newTrip);
+            });
+        } else {
+            await SocketService.findNewDriver(null, io, newTrip);
+        }
 
         res.status(201).json(newTrip);
     } catch (error) {

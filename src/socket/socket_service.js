@@ -4,14 +4,22 @@ const driverService = require('../services/driver_service');
 const tripService = require('../services/trip_service');
 
 class SocketService {
-    static async findNewDriver(socket, io, trip) {
-        const selectedDriver = await driverService.findNearestDriver(trip);
+    static async findNewDriver(_, io, trip) {
 
+        const customer = await customerService.getCustomerById(tripData.customerId);
+        if (customer) {
+            const message = `Ban da dat thanh cong chuyen di ${newTrip.id}. Diem don: ${newTrip.pickupLocation}. Tong tien: ${newTrip.fare}`;
+            SmsService.sendSmsNotification(customer.phoneNumber
+                , message);
+        }
+
+        const selectedDriver = await driverService.findNearestDriver(trip);
         if (selectedDriver != null) {
             const newTrip = await tripService.getTripById(trip.id);
             const roomId = `DRIVER_${selectedDriver.driverId}`;
             io.to(roomId).emit(TripEvent.TRIP_DRIVER_ALLOCATE, newTrip.toJSON());
-            console.log('Found a driver: ', roomId);
+
+            console.log(`Found a driver for tripId: ${trip.id}, driverId: ${selectedDriver.driverId}`);
         }
 
         return selectedDriver
