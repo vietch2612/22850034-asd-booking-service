@@ -4,6 +4,7 @@ const SmsService = require('../services/sms_service');
 
 const tripService = require('../services/trip_service');
 const schedule = require('node-schedule');
+const TripStatus = require('../enums/trip_status');
 
 
 async function createTrip(req, res) {
@@ -14,12 +15,14 @@ async function createTrip(req, res) {
 
         const io = req.app.io;
 
-        if (tripData.scheduleTime != null) {
-            const scheduleTime = new Date(tripData.scheduleTime);
+        const scheduleTime = new Date(tripData.scheduleTime);
+        if (scheduleTime >= new Date() && tripData.serviceTypeId == 2) {
             const scheduleId = `TRIP_${newTrip.id}`;
             schedule.scheduleJob(scheduleId, scheduleTime, async () => {
                 await SocketService.findNewDriver(null, io, newTrip);
             });
+            await tripService.updateTrip(newTrip, { status: TripStatus.SCHEDULED });
+            console.log("Scheduled a new trip: ", scheduleId, " at ", scheduleTime);
         } else {
             await SocketService.findNewDriver(null, io, newTrip);
         }

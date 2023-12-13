@@ -2,13 +2,14 @@ const { sequelize } = require('../models');
 const TripEvent = require('../enums/trip_event');
 const driverService = require('../services/driver_service');
 const tripService = require('../services/trip_service');
+const customerService = require('../services/customer_service');
+const SmsService = require('../services/sms_service');
 
 class SocketService {
     static async findNewDriver(_, io, trip) {
-
-        const customer = await customerService.getCustomerById(tripData.customerId);
+        const customer = await customerService.getCustomerById(trip.customerId);
         if (customer) {
-            const message = `Ban da dat thanh cong chuyen di ${newTrip.id}. Diem don: ${newTrip.pickupLocation}. Tong tien: ${newTrip.fare}`;
+            const message = `Ban da dat thanh cong chuyen di ${trip.id}. Diem don: ${trip.pickupLocation}. Tong tien: ${trip.fare}`;
             SmsService.sendSmsNotification(customer.phoneNumber
                 , message);
         }

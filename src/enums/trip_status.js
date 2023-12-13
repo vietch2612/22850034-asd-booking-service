@@ -4,7 +4,8 @@ const TripStatus = {
     ARRIVED: 2,
     DRIVING: 3,
     COMPLETED: 4,
-    CANCELLED: 5
+    CANCELLED: 5,
+    SCHEDULED: 6
 };
 
 module.exports = TripStatus;
