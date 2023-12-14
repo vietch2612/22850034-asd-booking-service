@@ -3,6 +3,8 @@ const SocketService = require('../socket/socket_service');
 const SmsService = require('../services/sms_service');
 
 const tripService = require('../services/trip_service');
+const driverService = require('../services/driver_service');
+const customerService = require('../services/customer_service');
 const schedule = require('node-schedule');
 const TripStatus = require('../enums/trip_status');
 
@@ -86,10 +88,34 @@ async function calculateFare(req, res) {
     }
 }
 
+async function getStatistics(req, res) {
+    try {
+        const totalRevenue = await tripService.getTotalRevenue();
+        const totalTrips = await tripService.getTotalTrips();
+        const totalDrivers = await driverService.getTotalDrivers();
+        const totalCustomers = await customerService.getTotalCustomers();
+        const changeLastMonth = await tripService.getPercentageChangeLastMonth();
+        const totalTripsByStatus = await tripService.getTotalTripsByStatus();
+
+        res.status(200).json({
+            totalRevenue,
+            totalTrips,
+            totalDrivers,
+            totalCustomers,
+            changeLastMonth,
+            totalTripsByStatus
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 module.exports = {
     createTrip,
     getTripById,
     updateTrip,
     getAllTrips,
-    calculateFare
+    calculateFare,
+    getStatistics
 };

@@ -29,9 +29,14 @@ async function createCustomer(customerData) {
     return await Customer.create(customerData);
 }
 
+async function getTotalCustomers() {
+    return await Customer.count();
+}
+
 module.exports = {
     getAllCustomers,
     getCustomerById,
     searchCustomerPhone,
     createCustomer,
+    getTotalCustomers
 };

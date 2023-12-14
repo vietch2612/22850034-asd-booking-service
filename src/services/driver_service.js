@@ -73,4 +73,8 @@ async function updateDriver(driverData, newLocation) {
     return updatedDriver;
 }
 
-module.exports = { findNearestDriver, getDriverById, updateDriver };
+async function getTotalDrivers() {
+    return await Driver.count();
+}
+
+module.exports = { findNearestDriver, getDriverById, updateDriver, getTotalDrivers };

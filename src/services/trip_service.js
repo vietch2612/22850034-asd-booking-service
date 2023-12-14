@@ -1,4 +1,5 @@
 const models = require('../models'); // Adjust the path based on your project structure
+const { Sequelize, Op } = require('sequelize');
 
 const createTrip = async (tripData) => {
     try {
@@ -125,10 +126,92 @@ const newDeclinedTrip = async (declinedTripData) => {
     }
 };
 
+const getTotalRevenue = async () => {
+    try {
+        const totalRevenue = await models.Trip.sum('fare', {
+            where: {
+                status: 4,
+            },
+        });
+
+        return totalRevenue || 0;
+    } catch (error) {
+        throw error;
+    }
+};
+
+const getTotalTrips = async () => {
+    try {
+        const totalTrips = await models.Trip.count();
+
+        return totalTrips || 0;
+    } catch (error) {
+        throw error;
+    }
+}
+
+const getPercentageChangeLastMonth = async () => {
+    try {
+        const currentDate = new Date();
+        const lastMonthStartDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+        const lastMonthEndDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+
+
+        console.log("lastMonthStartDate: ", lastMonthStartDate);
+        console.log("lastMonthEndDate: ", lastMonthEndDate);
+
+        const totalTripsLastMonth = await models.Trip.count({
+            where: {
+                createdAt: {
+                    [Op.between]: [lastMonthStartDate, lastMonthEndDate],
+                },
+            },
+        });
+
+        const totalTripsCurrentMonth = await models.Trip.count({
+            where: {
+                createdAt: {
+                    [Op.between]: [lastMonthEndDate, currentDate],
+                },
+            },
+        });
+
+        console.log("totalTripsCurrentMonth: ", totalTripsCurrentMonth);
+        console.log("totalTripsLastMonth: ", totalTripsLastMonth);
+
+        const percentageChange = totalTripsLastMonth === 0
+            ? 100
+            : ((totalTripsCurrentMonth - totalTripsLastMonth) / totalTripsLastMonth) * 100;
+
+        return percentageChange;
+    } catch (error) {
+        throw error;
+    }
+};
+
+const getTotalTripsByStatus = async () => {
+    try {
+        const statusCounts = await models.Trip.findAll({
+            attributes: ['status', [Sequelize.fn('COUNT', Sequelize.col('id')), 'total']],
+            group: ['status'],
+            raw: true,
+        });
+
+        return statusCounts;
+    } catch (error) {
+        throw error;
+    }
+};
+
+
 module.exports = {
     createTrip,
     getTripById,
     updateTrip,
     getAllTrips,
-    newDeclinedTrip
+    newDeclinedTrip,
+    getTotalRevenue,
+    getTotalTrips,
+    getPercentageChangeLastMonth,
+    getTotalTripsByStatus
 };

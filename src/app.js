@@ -7,6 +7,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const tripRoutes = require('./routes/trip_route');
 const customerRoutes = require('./routes/customer_route');
+const statisticsRoutes = require('./routes/statistics_route');
 const { sequelize } = require('./models');
 const socketHandler = require('./socket/socket_handler');
 const authenticateRequest = require('./middlewares/auth_middleware');
@@ -33,6 +34,7 @@ app.use(authenticateRequest);
 /** Route management */
 app.use('/api/trips', tripRoutes);
 app.use('/api/customers', customerRoutes);
+app.use('/api/statistics', statisticsRoutes);
 
 /** Handle socket connection */
 socketHandler(io);

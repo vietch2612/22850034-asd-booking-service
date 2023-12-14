@@ -7,5 +7,6 @@ router.get('/', tripController.getAllTrips)
 router.get('/:id', tripController.getTripById)
 router.post('/', tripValidator.validateTripData, tripController.createTrip);
 router.post('/calculate-fare', tripController.calculateFare);
+router.get('/statistics', tripController.getStatistics);
 
 module.exports = router;
