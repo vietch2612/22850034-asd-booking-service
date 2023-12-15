@@ -19,11 +19,11 @@ async function createTrip(req, res) {
 
         const scheduleTime = new Date(tripData.scheduleTime);
         if (scheduleTime >= new Date() && tripData.serviceTypeId == 2) {
+            await tripService.updateTrip({ id: newTrip.id, status: TripStatus.SCHEDULED });
             const scheduleId = `TRIP_${newTrip.id}`;
             schedule.scheduleJob(scheduleId, scheduleTime, async () => {
                 await SocketService.findNewDriver(null, io, newTrip);
             });
-            await tripService.updateTrip(newTrip, { status: TripStatus.SCHEDULED });
             console.log("Scheduled a new trip: ", scheduleId, " at ", scheduleTime);
         } else {
             await SocketService.findNewDriver(null, io, newTrip);

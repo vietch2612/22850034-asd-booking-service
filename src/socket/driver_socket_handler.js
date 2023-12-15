@@ -50,6 +50,7 @@ module.exports = (socket, io) => {
 
             // Send SMS to customer
             const driver = trip.Driver;
+            const customer = trip.Customer
             if (driver != null) {
                 const message = `Da co Tai xe. Ten TX: ${driver.name}, SDT: ${driver.phoneNumber}, Bien So: ${driver.licensePlateNumber}`;
                 SmsService.sendSmsNotification(customer.phoneNumber
