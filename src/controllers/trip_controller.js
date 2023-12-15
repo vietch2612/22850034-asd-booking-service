@@ -79,7 +79,8 @@ async function updateTrip(req, res) {
 async function calculateFare(req, res) {
     try {
         const tripData = req.body;
-        const fare = await FareService.calculateFare(tripData.length / 1000, tripData.tripServiceType);
+        const fare = await FareService.calculateFare(tripData.length / 1000, tripData.
+            serviceType);
         console.log(tripData.length);
         res.status(200).json({ fare: fare });
     } catch (error) {
@@ -111,11 +112,22 @@ async function getStatistics(req, res) {
     }
 }
 
+async function updateTripRating(req, res) {
+    try {
+        tripService.updateTrip({ id: req.params.id, rating: req.body.rating });
+        res.status(200).json({ message: 'Rating updated' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 module.exports = {
     createTrip,
     getTripById,
     updateTrip,
     getAllTrips,
     calculateFare,
-    getStatistics
+    getStatistics,
+    updateTripRating
 };
