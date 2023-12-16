@@ -23,7 +23,9 @@ class FareService {
                 }
             }
 
-            return totalFare + totalFare * serviceType.surcharge / 100;
+            const surcharge = serviceType ? serviceType.surcharge / 100 : 0;
+
+            return (totalFare + totalFare * surcharge).toFixed(0);
         } catch (error) {
             console.error('Error calculating trip fare:', error);
             throw error;
