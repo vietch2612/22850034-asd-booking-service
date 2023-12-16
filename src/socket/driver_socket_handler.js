@@ -57,14 +57,14 @@ module.exports = (socket, io) => {
                     , message);
             }
 
-            console.log('TRIP_DRIVER_ALLOCATE', trip.toJSON());
+            console.log('SOCKET: TRIP_DRIVER_ALLOCATE', trip.toJSON());
         } catch (error) {
             console.error('Error updating trip:', error.message);
         }
     });
 
     socket.on(TripEvent.TRIP_DRIVER_DECLINE, async (tripData) => {
-        console.log("TRIP_DRIVER_DECLINE: ", tripData);
+        console.log("SOCKET: TRIP_DRIVER_DECLINE: ", tripData);
         try {
             await tripService.newDeclinedTrip({
                 tripId: tripData.id,
@@ -74,7 +74,7 @@ module.exports = (socket, io) => {
             const trip = await tripService.getTripById(tripData.id);
             await SocketService.findNewDriver(socket, io, trip);
 
-            console.log('TRIP_DRIVER_DECLINE', tripData);
+            console.log('SOCKET: TRIP_DRIVER_DECLINE: ', tripData);
         } catch (error) {
             console.error('Error declining trip:', error.message);
         }
@@ -95,7 +95,7 @@ module.exports = (socket, io) => {
             io.to(tripData.id).emit(TripEvent.TRIP_DRIVER_ARRIVED, trip.toJSON());
             console.log('Driver has arrived!')
         } catch (error) {
-            console.error('ARRIVED: Error updating trip:', error.message);
+            console.error('TRIP_DRIVER_ARRIVED: Error updating trip:', error.message);
         }
     });
 
@@ -108,14 +108,14 @@ module.exports = (socket, io) => {
 
             let trip = await tripService.updateTrip({
                 id: tripData.id,
-                status: TripStatus.ALLOCATED,
+                status: TripStatus.DRIVING,
                 driverId: tripData.driver.id
             });
 
             trip = await tripService.getTripById(trip.id);
             await io.to(trip.id).emit(TripEvent.TRIP_DRIVER_DRIVING, trip.toJSON());
         } catch (error) {
-            console.error('ARRIVED: Error updating trip:', error.message);
+            console.error('TRIP_DRIVER_DRIVING: Error updating trip:', error.message);
         }
     });
 
@@ -135,6 +135,19 @@ module.exports = (socket, io) => {
             console.log('Driver has completed!')
         } catch (error) {
             console.error('COMPLETED: Error updating trip:', error.message);
+        }
+    });
+
+    socket.on(TripEvent.TRIP_DRIVER_DRIVING_UPDATE, async (tripData) => {
+        try {
+            console.log("SOCKET: TRIP_DRIVER_DRIVING_UPDATE: ", tripData);
+            await driverService.updateDriver({
+                id: tripData.driver.id,
+            }, tripData.driver.driverLocation);
+
+            await io.to(tripData.id).emit(TripEvent.TRIP_DRIVER_DRIVING_UPDATE, tripData);
+        } catch (error) {
+            console.error('TRIP_DRIVER_DRIVING_UPDATE: Error updating trip:', error.message);
         }
     });
 

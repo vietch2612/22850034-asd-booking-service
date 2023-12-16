@@ -20,7 +20,9 @@ class SocketService {
             const roomId = `DRIVER_${selectedDriver.driverId}`;
             io.to(roomId).emit(TripEvent.TRIP_DRIVER_ALLOCATE, newTrip.toJSON());
 
+            console.log(`----------------------------------------------------------------------------`);
             console.log(`Found a driver for tripId: ${trip.id}, driverId: ${selectedDriver.driverId}`);
+            console.log(`----------------------------------------------------------------------------`);
         }
 
         return selectedDriver

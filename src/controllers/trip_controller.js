@@ -24,7 +24,9 @@ async function createTrip(req, res) {
             schedule.scheduleJob(scheduleId, scheduleTime, async () => {
                 await SocketService.findNewDriver(null, io, newTrip);
             });
+            console.log(`----------------------------------------------------------------------------`);
             console.log("Scheduled a new trip: ", scheduleId, " at ", scheduleTime);
+            console.log(`----------------------------------------------------------------------------`);
         } else {
             await SocketService.findNewDriver(null, io, newTrip);
         }

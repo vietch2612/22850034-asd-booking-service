@@ -8,6 +8,7 @@ const TripEvent = {
     TRIP_DRIVER_DECLINE: 'trip_driver_decline',
     TRIP_DRIVER_ARRIVED: 'trip_driver_arrived',
     TRIP_DRIVER_DRIVING: 'trip_driver_driving',
+    TRIP_DRIVER_DRIVING_UPDATE: 'trip_driver_driving_update', // Create a new event for driver's location update
     TRIP_DRIVER_COMPLETED: 'trip_driver_completed'
 };
 

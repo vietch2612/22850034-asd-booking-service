@@ -19,17 +19,17 @@ const io = socketIo(server);
 app.use(cors());
 app.use(bodyParser.json());
 
-// Temporarily logger
+/* Log incoming requests */
+/* Temporary solution for debugging, will replace it with morgan logger later */
 app.use((req, res, next) => {
   console.log('Incoming Request Body:', req.body);
   next();
 });
 
-// Init socket connection
+/** Socket.io */
 app.io = io;
 
 app.use(authenticateRequest);
-
 
 /** Route management */
 app.use('/api/trips', tripRoutes);
