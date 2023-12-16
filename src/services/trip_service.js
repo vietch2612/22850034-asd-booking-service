@@ -156,10 +156,6 @@ const getPercentageChangeLastMonth = async () => {
         const lastMonthStartDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
         const lastMonthEndDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
 
-
-        console.log("lastMonthStartDate: ", lastMonthStartDate);
-        console.log("lastMonthEndDate: ", lastMonthEndDate);
-
         const totalTripsLastMonth = await models.Trip.count({
             where: {
                 createdAt: {
@@ -175,9 +171,6 @@ const getPercentageChangeLastMonth = async () => {
                 },
             },
         });
-
-        console.log("totalTripsCurrentMonth: ", totalTripsCurrentMonth);
-        console.log("totalTripsLastMonth: ", totalTripsLastMonth);
 
         const percentageChange = totalTripsLastMonth === 0
             ? 100

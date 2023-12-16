@@ -35,6 +35,7 @@
     "socket.io": "^4.7.2",
     "twilio": "^4.19.0",
     "typedi": "^0.10.0",
+    "winson": "^1.0.0",
     "winston": "^3.11.0"
   },
   "devDependencies": {

@@ -1,15 +1,16 @@
 const passengerSocketHandler = require('./passenger_socket_handler');
 const driverSocketHandler = require('./driver_socket_handler');
+const logger = require('../utils/logger');
 
 module.exports = (io) => {
     io.on('connection', (socket) => {
-        console.log('A user connected');
+        logger.info('A user is connected to the socket');
 
         passengerSocketHandler(socket, io);
         driverSocketHandler(socket, io);
 
         socket.on('disconnect', () => {
-            console.log('A user disconnected');
+            logger.info('A user is disconnected to the socket');
         });
     });
 };

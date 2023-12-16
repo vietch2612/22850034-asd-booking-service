@@ -3,6 +3,7 @@ const { DriverLocation, Driver, DeclinedTrip, Trip } = require('../models');
 const DriverStatus = require('../enums/driver_status');
 const TripStatus = require('../enums/trip_status');
 const { Sequelize, Op } = require('sequelize');
+const logger = require('../utils/logger');
 
 async function findNearestDriver(trip) {
     const pickupLocationLat = trip.pickupLocationLat;
@@ -36,18 +37,18 @@ async function findNearestDriver(trip) {
             }
 
             if (nearestDriver) {
-                console.log('Nearest Driver within 5 km:', nearestDriver.toJSON());
+                logger.info('Nearest Driver within 5 km:', nearestDriver.toJSON());
             } else {
-                console.log('No drivers found within 5 km.');
+                logger.error('No drivers found within 5 km.');
             }
 
             return nearestDriver;
         } else {
-            console.log('No available drivers.');
+            logger.error('No available drivers.');
             return null;
         }
     } catch (error) {
-        console.error('Error finding nearest driver:', error.message);
+        logger.error('Error finding nearest driver:', error.message);
         return null;
     }
 }

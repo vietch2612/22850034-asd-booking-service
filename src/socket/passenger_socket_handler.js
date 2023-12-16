@@ -4,6 +4,7 @@ const customerService = require('../services/customer_service');
 const TripStatus = require('../enums/trip_status');
 const TripEvent = require('../enums/trip_event');
 const SocketService = require('../socket/socket_service');
+const logger = require('../utils/logger');
 
 module.exports = (socket, io) => {
 
@@ -24,10 +25,10 @@ module.exports = (socket, io) => {
 
             await SocketService.findNewDriver(socket, io, trip);
 
-            console.log(`[Socket]: Received a new trip ${newTrip.id}`);
-            console.log(trip.toJSON());
+            logger.info(`[Socket]: Received a new trip ${newTrip.id}`);
+            logger.info(trip.toJSON());
         } catch (error) {
-            console.error('Error creating trip:', error.message);
+            logger.error('Error creating trip:', error.message);
         }
     });
 }

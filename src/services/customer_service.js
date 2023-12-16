@@ -1,6 +1,6 @@
 const { Customer } = require('../models');
 const { CustomerType } = require('../models');
-
+const logger = require('../utils/logger');
 
 async function getAllCustomers() {
     return await Customer.findAll();
@@ -11,7 +11,7 @@ async function getCustomerById(customerId) {
 }
 
 async function searchCustomerPhone(phoneNumber) {
-    console.log("searching customer by phone number: ", phoneNumber);
+    logger.info("searching customer by phone number: ", phoneNumber);
     return await Customer.findAll({
         where: {
             phoneNumber: phoneNumber,

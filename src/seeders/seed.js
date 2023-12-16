@@ -9,9 +9,6 @@ const seedData = async () => {
             { name: 'Premium', discountPercent: 10 },
         ]);
 
-        console.log("OK til here!")
-
-
         // Car Brands
         await sequelize.models.CarBrand.bulkCreate([
             { name: 'Toyota' },

@@ -25,7 +25,7 @@ class FareService {
 
             return (totalFare + totalFare * surcharge).toFixed(0);
         } catch (error) {
-            console.error('Error calculating trip fare:', error);
+            logger.error('Error calculating trip fare:', error);
             throw error;
         }
     }

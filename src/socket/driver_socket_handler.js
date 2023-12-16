@@ -5,9 +5,9 @@ const TripEvent = require('../enums/trip_event');
 const DriverStatus = require('../enums/driver_status');
 const SocketService = require('../socket/socket_service');
 const SmsService = require('../services/sms_service');
+const logger = require('../utils/logger');
 
 module.exports = (socket, io) => {
-
     socket.on(TripEvent.DRIVER_ACTIVE, async (driverData) => {
         await driverService.updateDriver({
             id: driverData.id,
@@ -16,7 +16,7 @@ module.exports = (socket, io) => {
         const roomId = `DRIVER_${driverData.id}`;
         await socket.join(roomId);
 
-        console.log(`Driver ${driverData.id} active successfully! Joined room: ${roomId}`);
+        logger.info(`Driver ${driverData.id} active successfully! Joined room: ${roomId}`);
     });
 
     socket.on(TripEvent.DRIVER_CANCEL, async (driverData) => {
@@ -27,11 +27,11 @@ module.exports = (socket, io) => {
         const roomId = `DRIVER_${driverData.id}`;
         await socket.leave(roomId);
 
-        console.log(`Driver ${driverData.id} inactive successfully!`);
+        logger.info(`Driver ${driverData.id} inactive successfully!`);
     });
 
     socket.on(TripEvent.TRIP_DRIVER_ACCEPT, async (tripData) => {
-        console.log("TRIP_DRIVER_ACCEPT: ", tripData);
+        logger.info("TRIP_DRIVER_ACCEPT: ", tripData);
         try {
             await driverService.updateDriver({
                 id: tripData.driver.id,
@@ -50,21 +50,18 @@ module.exports = (socket, io) => {
 
             // Send SMS to customer
             const driver = trip.Driver;
-            const customer = trip.Customer
             if (driver != null) {
-                const message = `Da co Tai xe. Ten TX: ${driver.name}, SDT: ${driver.phoneNumber}, Bien So: ${driver.licensePlateNumber}`;
-                SmsService.sendSmsNotification(customer.phoneNumber
-                    , message);
+                SmsService.notifyFoundDriverSMS(trip, driver);
             }
 
-            console.log('SOCKET: TRIP_DRIVER_ALLOCATE', trip.toJSON());
+            logger.info('SOCKET: TRIP_DRIVER_ALLOCATE', trip.toJSON());
         } catch (error) {
             console.error('Error updating trip:', error.message);
         }
     });
 
     socket.on(TripEvent.TRIP_DRIVER_DECLINE, async (tripData) => {
-        console.log("SOCKET: TRIP_DRIVER_DECLINE: ", tripData);
+        logger.info("SOCKET: TRIP_DRIVER_DECLINE: ", tripData);
         try {
             await tripService.newDeclinedTrip({
                 tripId: tripData.id,
@@ -74,7 +71,7 @@ module.exports = (socket, io) => {
             const trip = await tripService.getTripById(tripData.id);
             await SocketService.findNewDriver(socket, io, trip);
 
-            console.log('SOCKET: TRIP_DRIVER_DECLINE: ', tripData);
+            logger.info('SOCKET: TRIP_DRIVER_DECLINE: ', tripData);
         } catch (error) {
             console.error('Error declining trip:', error.message);
         }
@@ -93,7 +90,7 @@ module.exports = (socket, io) => {
 
             trip = await tripService.getTripById(trip.id);
             io.to(tripData.id).emit(TripEvent.TRIP_DRIVER_ARRIVED, trip.toJSON());
-            console.log('Driver has arrived!')
+            logger.info('Driver has arrived!')
         } catch (error) {
             console.error('TRIP_DRIVER_ARRIVED: Error updating trip:', error.message);
         }
@@ -132,7 +129,7 @@ module.exports = (socket, io) => {
 
             trip = await tripService.getTripById(trip.id);
             io.to(tripData.id).emit(TripEvent.TRIP_DRIVER_COMPLETED, trip.toJSON());
-            console.log('Driver has completed!')
+            logger.info('Driver has completed!')
         } catch (error) {
             console.error('COMPLETED: Error updating trip:', error.message);
         }
@@ -140,7 +137,7 @@ module.exports = (socket, io) => {
 
     socket.on(TripEvent.TRIP_DRIVER_DRIVING_UPDATE, async (tripData) => {
         try {
-            console.log("SOCKET: TRIP_DRIVER_DRIVING_UPDATE: ", tripData);
+            logger.info("SOCKET: TRIP_DRIVER_DRIVING_UPDATE: ", tripData);
             await driverService.updateDriver({
                 id: tripData.driver.id,
             }, tripData.driver.driverLocation);

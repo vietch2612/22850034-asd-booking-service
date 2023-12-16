@@ -11,20 +11,25 @@ const statisticsRoutes = require('./routes/statistics_route');
 const { sequelize } = require('./models');
 const socketHandler = require('./socket/socket_handler');
 const authenticateRequest = require('./middlewares/auth_middleware');
+const morgan = require('morgan');
+const logger = require('./utils/logger');
 
 const app = express();
+
+logger.stream = {
+  write: function (message, encoding) {
+    logger.info(message.trim());
+  },
+};
+
+/* Log incoming requests */
+app.use(morgan(':method :url :status :response-time ms - :res[content-length] - :req[headers]', { stream: logger.stream }));
+
 const server = http.createServer(app);
 const io = socketIo(server);
 
 app.use(cors());
 app.use(bodyParser.json());
-
-/* Log incoming requests */
-/* Temporary solution for debugging, will replace it with morgan logger later */
-app.use((req, res, next) => {
-  console.log('Incoming Request Body:', req.body);
-  next();
-});
 
 /** Socket.io */
 app.io = io;
@@ -42,8 +47,8 @@ socketHandler(io);
 /** Start the server */
 const port = process.env.PORT || 4000;
 sequelize.sync().then(() => {
-  console.log('HCMUSCab BE PostgreSQL database connected');
+  logger.info('HCMUSCab BE PostgreSQL database connected');
   server.listen(port, () => {
-    console.log(`HCMUSCab BE is running on http://localhost:${port}`);
+    logger.info(`HCMUSCab BE is running on http://localhost:${port}`);
   });
 });

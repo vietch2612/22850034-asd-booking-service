@@ -1,19 +1,19 @@
 const FareService = require('../services/fare_service');
 const SocketService = require('../socket/socket_service');
-const SmsService = require('../services/sms_service');
 
 const tripService = require('../services/trip_service');
 const driverService = require('../services/driver_service');
 const customerService = require('../services/customer_service');
 const schedule = require('node-schedule');
 const TripStatus = require('../enums/trip_status');
+const logger = require('../utils/logger');
 
 
 async function createTrip(req, res) {
     try {
         const tripData = req.body;
         const newTrip = await tripService.createTrip(tripData);
-        console.log("Received a new trip from Admin: ", newTrip.toJSON());
+        logger.debug("Received a new trip from Admin: ", newTrip.toJSON());
 
         const io = req.app.io;
 
@@ -24,9 +24,7 @@ async function createTrip(req, res) {
             schedule.scheduleJob(scheduleId, scheduleTime, async () => {
                 await SocketService.findNewDriver(null, io, newTrip);
             });
-            console.log(`----------------------------------------------------------------------------`);
-            console.log("Scheduled a new trip: ", scheduleId, " at ", scheduleTime);
-            console.log(`----------------------------------------------------------------------------`);
+            logger.debug("Scheduled a new trip: ", scheduleId, " at ", scheduleTime);
         } else {
             await SocketService.findNewDriver(null, io, newTrip);
         }
@@ -54,7 +52,7 @@ async function getTripById(req, res) {
     }
 }
 
-async function getAllTrips(req, res) {
+async function getAllTrips(_, res) {
     try {
         const trips = await tripService.getAllTrips();
         res.status(200).json(trips);
@@ -83,7 +81,7 @@ async function calculateFare(req, res) {
         const tripData = req.body;
         const fare = await FareService.calculateFare(tripData.length / 1000, tripData.
             serviceType);
-        console.log(tripData.length);
+        logger.debug(tripData.length);
         res.status(200).json({ fare: fare });
     } catch (error) {
         console.error(error);
@@ -109,7 +107,7 @@ async function getStatistics(req, res) {
             totalTripsByStatus
         });
     } catch (error) {
-        console.error(error);
+        logger.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
