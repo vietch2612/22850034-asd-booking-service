@@ -137,7 +137,7 @@ module.exports = (socket, io) => {
 
     socket.on(TripEvent.TRIP_DRIVER_DRIVING_UPDATE, async (tripData) => {
         try {
-            logger.info("SOCKET: TRIP_DRIVER_DRIVING_UPDATE: ", tripData);
+            logger.info("SOCKET: TRIP_DRIVER_DRIVING_UPDATE: %O", tripData);
             await driverService.updateDriver({
                 id: tripData.driver.id,
             }, tripData.driver.driverLocation);

@@ -21,7 +21,7 @@ async function sendSmsNotification(phones, content) {
                 from: '+18635887143',
                 to: formatPhoneNumber(phones)
             })
-            .then(message => logger.warning(`SMS is sent. ID: ${message.sid}`));
+            .then(message => logger.warn(`SMS is sent. ID: ${message.sid}`));
     }
 }
 
